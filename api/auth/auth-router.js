@@ -5,7 +5,19 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const User = require('./auth-model')
 
+
+
 router.post('/register', checkUsernameExists, checkRegistrationValid, (req, res, next) => {
+
+  const { username, password } = req.body;
+  const hash = bcrypt.hashSync(req.body.password, 8)
+  User.add({username, password: hash})
+    .then(newUser => {
+      res.status(201).json(newUser)
+  })
+    .catch(next)
+});
+
   /*
     IMPLEMENT
     You are welcome to build additional middlewares to help with the endpoint's functionality.
@@ -32,14 +44,10 @@ router.post('/register', checkUsernameExists, checkRegistrationValid, (req, res,
       the response body should include a string exactly as follows: "username taken".
   */
 
-      const { username, password } = req.body
-      const hash = bcrypt.hashSync(password, 8)
-      User.add({username, password: hash})
-      .then(newUser => {
-          res.status(201).json(newUser)
-      })
-      .catch(next)
-});
+      
+
+
+
 
 router.post('/login', checkRegistrationValid, (req, res, next) => {
   

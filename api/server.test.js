@@ -2,7 +2,7 @@
 const request = require('supertest')
 const db = require('../data/dbConfig')
 const server = require('./server')
-
+const bcrypt = require('bcryptjs')
 
 
 
@@ -31,7 +31,6 @@ test("correct testing environment", () => {
 
 describe('[POST / register', () => {
   const user1 = {username: "Vanessa", password: "abc123"}
-  
 
   test('Successful registration responds with 201 code and ', async () => {
     const res = await request(server).post('/api/auth/register').send(user1)

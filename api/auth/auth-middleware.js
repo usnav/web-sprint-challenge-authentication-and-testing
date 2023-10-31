@@ -5,7 +5,7 @@ const {
  const checkRegistrationValid = (req, res, next) => {
     const { username, password } = req.body
         if (!username || !password) {
-            next({status: 401, 
+            res.status(401).json({
                 message: "username and password required"
             })
         } else {

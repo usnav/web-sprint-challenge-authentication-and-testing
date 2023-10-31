@@ -31,13 +31,14 @@ test("correct testing environment", () => {
 
 describe('[POST / register', () => {
   const user1 = {username: "Vanessa", password: "abc123"}
-
+  const user2 = {username: "Karen", password: "berry123"}
   test('Successful registration responds with 201 code and ', async () => {
     const res = await request(server).post('/api/auth/register').send(user1)
     console.log(res.body)
     expect(res.status).toBe(201)
     expect(res.body.username).toMatch('Vanessa')
   })
+  
 })
 
 describe('[GET / returns correct response', () => {

@@ -7,7 +7,7 @@ const User = require('./auth-model')
 
 
 
-router.post('/register', checkUsernameExists, checkRegistrationValid, (req, res, next) => {
+router.post('/register', checkRegistrationValid, checkUsernameExists,  (req, res, next) => {
 
   const { username, password } = req.body;
   const hash = bcrypt.hashSync(req.body.password, 8)
